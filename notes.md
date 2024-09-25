@@ -2,9 +2,12 @@
 
 ## kubectl commands
 
+## Chapter 3 - Getting Kubernetes
+* To list nodes: ```kubectl get nodes```
 * To show *kubeconfig* file: ```kubectl config view```
 * To show current context: ```kubectl config current-context```
 * To change the current context: ```kubectl config use context {context-name}```
+## Chapter 4 - Working with Pods
 * To list all pod attributes: ```kubectl explain pods --recursive```
 * To deploy a pod: ```kubectl apply -f {pod-manifest-file}```
 * To check the status of a pod(s): ```kubectl get pods [{pod-name}]```
@@ -15,3 +18,16 @@
 * To execute commands inside a container (interactive session): ```kubectl exec -it {pod-name} -- {command} [--container {container-name}]```
 * To delete a pod(s): ```kubectl delete pod {pod-name} [{pod-name}]...``` or ```kubectl delete -f {pod-manifest-file} [{pod-manifest-file}]...```
 * To delete a service(s): ```kubectl delete svc {service-name} [{service-name}]...```
+## Chapter 5 - Virtual Clusters and Namespaces
+* To list api resources: ```kubectl api-resources```
+* To list namespaces: ```kubectl get namespaces``` or ```kubectl get ns```
+* To inspect a namespace: ```kubectl describe ns {namespace}```  
+**Note:** You can  add ```-n``` or ```--namespace``` to ```kubectl``` commands to filter results against a specific Namespace. For example:
+* ```kubectl get svc --namespace {namespace}``` equivalently ```kubectl get svc -n {namespace}```  
+You can also use the ```--all-namespaces``` flag to return objects from all Namespaces.
+* To create a namespace imperatively: ```kubectl create ns {namespace}```
+* To create a namespace declaratively, define it using a manifest file (.yml) file and run: ```kubectl apply -f {namespace-manifest-file}```
+* To delete a namespace: ```kubectl delete ns {namespace}```
+* To set ```kubectl``` to automatically run commands against a specific namespace: ```kubectl config set-context --current --namespace {namespace}```
+* To delete a namespace: ```kubectl delete ns {namespace}``` **Caution:** deleting a namespace automatically delete objects as pods, services, etc. associated with that namespace.
+After deleting a namespace don't forget to reset ```kubectl``` to use the *default* namespace ```kubectl config set-context --current --namespace default```
