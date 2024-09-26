@@ -31,3 +31,17 @@ You can also use the ```--all-namespaces``` flag to return objects from all Name
 * To set ```kubectl``` to automatically run commands against a specific namespace: ```kubectl config set-context --current --namespace {namespace}```
 * To delete a namespace: ```kubectl delete ns {namespace}``` **Caution:** deleting a namespace automatically delete objects as pods, services, etc. associated with that namespace.
 After deleting a namespace don't forget to reset ```kubectl``` to use the *default* namespace ```kubectl config set-context --current --namespace default```
+## Chapter 6 - Kubernetes Deployments
+* To create (apply) a deployment: ```kubectl apply -f {deployment-manifest-file}```
+* To get inspect a deployment: ```kubectl get deploy {deployment-name}``` or ```kubectl describe deploy {deployment-name}```
+* To list ReplicaSets: ```kubectl get rs```
+* To inspect a ReplicaSet: ```kubectl describe rs {replicaset-name}```
+* To manually scale a deployment (imperatively): ```kubectl scale deploy {deployment-name} --replicas {number-of-replicas}``` **Caution:** This is not the recomended way to scale a deployment, instead update and re-apply the deployment's manifest file.  
+* To perform a rolling update: Update and re-apply the deployment's manifest file, i.e., ```kubectl apply -d {updated-deployment-manifest-file}```
+* To monitor the rollout process: ```kubectl rollout status deployment {deployment-name}```
+* To pause the rollout process: ```kubectl rollout pause deploy {deployment-name}```
+* To resume the rollout process: ```kubectl rollout resume deploy {deployment-name}```
+* To list the rollout history of a deployment: ```kubectl rollout history deployment {deployment-name}```
+* To rollback a deployment (imperatively): ```kubectl rollout undo deployment {deployment-name} --to-revision={revision-number}``` **Caution:** This is not the recomended way to rollback a deployment, instead update and re-apply the deployment's manifest file.
+* To delete a deployment: ```kubectl delete -f {deployment-manifest-file}``` 
+
