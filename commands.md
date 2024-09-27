@@ -24,9 +24,7 @@
 * To list api resources: ```kubectl api-resources```
 * To list namespaces: ```kubectl get namespaces``` or ```kubectl get ns```
 * To inspect a namespace: ```kubectl describe ns {namespace}```  
-**Note:** You can  add ```-n``` or ```--namespace``` to ```kubectl``` commands to filter results against a specific Namespace. For example:
-* ```kubectl get svc --namespace {namespace}``` equivalently ```kubectl get svc -n {namespace}```  
-You can also use the ```--all-namespaces``` flag to return objects from all Namespaces.
+**Note:** You can  add ```-n``` or ```--namespace``` to ```kubectl``` commands to filter results against a specific Namespace. For example: ```kubectl get svc --namespace {namespace}``` equivalently ```kubectl get svc -n {namespace}``` You can also use the ```--all-namespaces``` flag to return objects from all Namespaces.
 * To create a namespace *imperatively*: ```kubectl create ns {namespace}```
 * To create a namespace *declaratively*, define it using a manifest file (.yml) file and run: ```kubectl apply -f {namespace-manifest-file}```
 * To delete a namespace: ```kubectl delete ns {namespace}```
