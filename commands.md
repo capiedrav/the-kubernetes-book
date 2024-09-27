@@ -16,9 +16,9 @@
 * To get the logs of a container running inside the pod: ```kubectl logs {pod-name} [--container {container-name}]```
 * To execute commands inside a container (remote command execution): ```kubectl exec {pod-name} -- {command} [--container {container-name}]```
 * To execute commands inside a container (interactive session): ```kubectl exec -it {pod-name} -- {command} [--container {container-name}]```
-* To delete a pod(s) *imperatively*: ```kubectl delete pod {pod-name} [{pod-name}]...``` **Caution:** This is not the recomended way to delete a pod, instead, use the *declaratively* way.  
+* To delete a pod(s) *imperatively*: ```kubectl delete pod {pod-name} [{pod-name}]...``` **Caution:** This is not the recomended way to delete a pod, instead, use the *declarative* way.  
 * To delete a pod(s) *declaratively*: ```kubectl delete -f {pod-manifest-file} [{pod-manifest-file}]...```
-* To delete a service(s) *imperatively*: ```kubectl delete svc {service-name} [{service-name}]...``` **Caution:** This is not the recomended way to delete a service, instead, use the *declaratively* way.
+* To delete a service(s) *imperatively*: ```kubectl delete svc {service-name} [{service-name}]...``` **Caution:** This is not the recomended way to delete a service, instead, use the *declarative* way.
 * To delete a service(s) *declaratively*: ```kubectl delete -f {svc-manifest-file} [{svc-manifest-file}]...```  
 ## Chapter 5 - Virtual Clusters and Namespaces
 * To list api resources: ```kubectl api-resources```
@@ -46,3 +46,12 @@ After deleting a namespace don't forget to reset ```kubectl``` to use the *defau
 * To list the rollout history of a deployment: ```kubectl rollout history deployment {deployment-name}```
 * To rollback a deployment *imperatively*: ```kubectl rollout undo deployment {deployment-name} --to-revision={revision-number}``` **Caution:** This is not the recomended way to rollback a deployment, instead update and re-apply the deployment's manifest file.
 * To delete a deployment: ```kubectl delete -f {deployment-manifest-file}```
+## Chapter 7 - Kubernetes Services
+* To create (deploy) a service *imperatively*: ```kubectl expose deployment {deployment-name} --type={LoadBalancer|ClusterIp|NodePort}``` **Caution:** This is not the recommended way to create a service, instead, use the *declarative* way.    
+* To create (deploy) a service *declaratively*: ```kubectl apply -f {service-manifest-file}```
+* To inspect a service: ```kubectl get svc [{service-name}] [-o wide]``` or ```kubectl describe svc {service-name}```
+* To inspect endpointslices: ```kubectl get endpointslices [{endpointslice-name}]``` or ```kubectl describe endpointslice {endpointslice-name}```
+* To delete a service(s) *imperatively*: ```kubectl delete svc {service-name} [{service-name}]...``` **Caution:** This is not the recomended way to delete a service, instead, use the *declarative* way.
+* To delete a service(s) *declaratively*: ```kubectl delete -f {svc-manifest-file} [{svc-manifest-file}]...```  
+ 
+
