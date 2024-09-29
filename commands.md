@@ -16,9 +16,9 @@
 * To get the logs of a container running inside the pod: ```kubectl logs {pod-name} [--container {container-name}]```
 * To execute commands inside a container (remote command execution): ```kubectl exec {pod-name} -- {command} [--container {container-name}]```
 * To execute commands inside a container (interactive session): ```kubectl exec -it {pod-name} -- {command} [--container {container-name}]```
-* To delete a pod(s) *imperatively*: ```kubectl delete pod {pod-name} [{pod-name}]...``` **Caution:** This is not the recomended way to delete a pod, instead, use the *declarative* way.  
+* To delete a pod(s) *imperatively*: ```kubectl delete pod {pod-name} [{pod-name}]...``` **Caution:** This is not the recommended way to delete a pod, instead, use the *declarative* way.  
 * To delete a pod(s) *declaratively*: ```kubectl delete -f {pod-manifest-file} [{pod-manifest-file}]...```
-* To delete a service(s) *imperatively*: ```kubectl delete svc {service-name} [{service-name}]...``` **Caution:** This is not the recomended way to delete a service, instead, use the *declarative* way.
+* To delete a service(s) *imperatively*: ```kubectl delete svc {service-name} [{service-name}]...``` **Caution:** This is not the recommended way to delete a service, instead, use the *declarative* way.
 * To delete a service(s) *declaratively*: ```kubectl delete -f {svc-manifest-file} [{svc-manifest-file}]...```  
 ## Chapter 5 - Virtual Clusters and Namespaces
 * To list api resources: ```kubectl api-resources```
@@ -36,20 +36,28 @@ After deleting a namespace don't forget to reset ```kubectl``` to use the *defau
 * To get inspect a deployment: ```kubectl get deploy {deployment-name}``` or ```kubectl describe deploy {deployment-name}```
 * To list ReplicaSets: ```kubectl get rs```
 * To inspect a ReplicaSet: ```kubectl describe rs {replicaset-name}```
-* To manually scale a deployment *imperatively*: ```kubectl scale deploy {deployment-name} --replicas {number-of-replicas}``` **Caution:** This is not the recomended way to scale a deployment, instead update and re-apply the deployment's manifest file.  
+* To manually scale a deployment *imperatively*: ```kubectl scale deploy {deployment-name} --replicas {number-of-replicas}``` **Caution:** This is not the recommended way to scale a deployment, instead update and re-apply the deployment's manifest file.  
 * To perform a rolling update: Update and re-apply the deployment's manifest file, i.e., ```kubectl apply -d {updated-deployment-manifest-file}```
 * To monitor the rollout process: ```kubectl rollout status deployment {deployment-name}```
 * To pause the rollout process: ```kubectl rollout pause deploy {deployment-name}```
 * To resume the rollout process: ```kubectl rollout resume deploy {deployment-name}```
 * To list the rollout history of a deployment: ```kubectl rollout history deployment {deployment-name}```
-* To rollback a deployment *imperatively*: ```kubectl rollout undo deployment {deployment-name} --to-revision={revision-number}``` **Caution:** This is not the recomended way to rollback a deployment, instead update and re-apply the deployment's manifest file.
+* To rollback a deployment *imperatively*: ```kubectl rollout undo deployment {deployment-name} --to-revision={revision-number}``` **Caution:** This is not the recommended way to rollback a deployment, instead update and re-apply the deployment's manifest file.
 * To delete a deployment: ```kubectl delete -f {deployment-manifest-file}```
 ## Chapter 7 - Kubernetes Services
 * To create (deploy) a service *imperatively*: ```kubectl expose deployment {deployment-name} --type={LoadBalancer|ClusterIp|NodePort}``` **Caution:** This is not the recommended way to create a service, instead, use the *declarative* way.    
-* To create (deploy) a service *declaratively*: ```kubectl apply -f {service-manifest-file}```
+* To create (deploy) a service *declaratively*: ```kubectl apply -f {service-manifest-file}``` **Note:** Running minikube on Linux with the Docker driver will result in no tunnel being created. So, to expose the service, use the ```minikube service {service-name} --url``` command. It must be run in a separate terminal window to keep the tunnel open. ```Ctrl-C``` in the terminal can be used to terminate the process at which time the network routes will be cleaned up.   
 * To inspect a service: ```kubectl get svc [{service-name}] [-o wide]``` or ```kubectl describe svc {service-name}```
 * To inspect endpointslices: ```kubectl get endpointslices [{endpointslice-name}]``` or ```kubectl describe endpointslice {endpointslice-name}```
-* To delete a service(s) *imperatively*: ```kubectl delete svc {service-name} [{service-name}]...``` **Caution:** This is not the recomended way to delete a service, instead, use the *declarative* way.
-* To delete a service(s) *declaratively*: ```kubectl delete -f {svc-manifest-file} [{svc-manifest-file}]...```  
+* To delete a service(s) *imperatively*: ```kubectl delete svc {service-name} [{service-name}]...``` **Caution:** This is not the recommended way to delete a service, instead, use the *declarative* way.
+* To delete a service(s) *declaratively*: ```kubectl delete -f {svc-manifest-file} [{svc-manifest-file}]...```
+## Chapter 8 - Ingress
+* To install the *NGINX* ingress controller in *minikube*: ```minikube addons enable ingress```
+* To verify that the *NGINX* ingress controller is running: ```kubectl get pods -n ingress-nginx``` **Note:** It can take up to a minute before these pods are running OK.
+* To inspect an ingressclass: ```kubectl get ingressclass [{ingressclass-name}]``` or ```kubectl describe ingressclass {ingressclass-name}```
+* To create (deploy) an ingress object *declaratively*: ```kubectl apply -f {ingress-manifest-file}```
+* To inspect an ingress object: ```kubectl get ing [{ingress-name}]``` or ```kubectl describe ing {ingress-name}```
+* To delete an ingress object: ```kubectl delete -f {ingress-manifest-file}```
+
  
 
