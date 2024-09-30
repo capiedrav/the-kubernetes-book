@@ -52,12 +52,18 @@ After deleting a namespace don't forget to reset ```kubectl``` to use the *defau
 * To delete a service(s) *imperatively*: ```kubectl delete svc {service-name} [{service-name}]...``` **Caution:** This is not the recommended way to delete a service, instead, use the *declarative* way.
 * To delete a service(s) *declaratively*: ```kubectl delete -f {svc-manifest-file} [{svc-manifest-file}]...```
 ## Chapter 8 - Ingress
-* To install the *NGINX* ingress controller in *minikube*: ```minikube addons enable ingress```
-* To verify that the *NGINX* ingress controller is running: ```kubectl get pods -n ingress-nginx``` **Note:** It can take up to a minute before these pods are running OK.
+* To install the NGINX ingress controller in minikube: ```minikube addons enable ingress```
+* To verify that the NGINX ingress controller is running: ```kubectl get pods -n ingress-nginx``` **Note:** It can take up to a minute before these pods are running OK.
 * To inspect an ingressclass: ```kubectl get ingressclass [{ingressclass-name}]``` or ```kubectl describe ingressclass {ingressclass-name}```
 * To create (deploy) an ingress object *declaratively*: ```kubectl apply -f {ingress-manifest-file}```
 * To inspect an ingress object: ```kubectl get ing [{ingress-name}]``` or ```kubectl describe ing {ingress-name}```
 * To delete an ingress object: ```kubectl delete -f {ingress-manifest-file}```
+## Chapter 10 - Service Discovery Deep Dive
+* To list the pods running the cluster DNS: ```kubectl get pods -n kube-system -l k8s-app=kube-dns```
+* To show the deployment that manage the pods: ```kubectl get deploy -n kube-system -l k8s-app=kube-dns```
+* To show the service in front of the cluster DNS pods (called *kube-dns*): ```kubectl get svc -n kube-system -l k8s-app=kube-dns```
+**Important:** Kubernetes configures every container to use the cluster DNS for service discovery. This is done by automatically configuring every container’s
+```/etc/resolv.conf``` file with the IP address of the cluster DNS Service. It also adds search domains to append to unqualified names.
 
  
 
