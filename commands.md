@@ -64,6 +64,20 @@ After deleting a namespace don't forget to reset ```kubectl``` to use the *defau
 * To show the service in front of the cluster DNS pods (called *kube-dns*): ```kubectl get svc -n kube-system -l k8s-app=kube-dns```
 **Important:** Kubernetes configures every container to use the cluster DNS for service discovery. This is done by automatically configuring every container’s
 ```/etc/resolv.conf``` file with the IP address of the cluster DNS Service. It also adds search domains to append to unqualified names.
+## Chapter 11 - Kubernetes Storage
+* To inspect a sc (StorageClass): ```kubectl get sc [{storageclass-name}]``` or ```kubectl describe sc {storageclass-name}```
+* To inspect a pvc (PersistentVolumeClaim): ```kubectl get pvc [{pvc-name}]``` or ```kubectl describe pvc {pvc-name}``` 
+* To inspect a pv (PersistentVolume): ```kubectl get pv [{pv-name}]``` or ```kubectl describe pv {pv-name}```
+* To create (deploy) a pvc *declaratively*: ```kubectl apply -f {pvc-manifest-file}```
+* To delete a pvc *imperatively*: ```kubectl delete pvc {pvc-name}``` **Caution:** This is not the recommended way to delete a pvc, instead, use the *declarative* way.
+* To delete a pvc *declaratively*: ```kubectl delete -f {pvc-manifest-file}``` **Note:** Deleting the pvc **could or could not** delete the pv. This depends on the *ReclaimPolicy* of the storageclass used to create the pvc.
+* To create (deploy) a sc *declaratively*: ```kubectl apply -f {storageclass-manifest-file}```
+* To delete a pv *imperatively*: ```kubectl delete pv {pv-name}``` **Note:** This command is used when a pvc is deleted and the *ReclaimPolicy* of the storageclass is *Retain*
+* To delete a sc *imperatively*: ```kubectl delete sc {storageclass-name}``` **Caution:** This is not the recommended way to delete a sc, instead, use the *declarative* way.
+* To delete a sc *declaratively*: ```kubectl delete -f {storageclass-manifest-file}```
+
+
+
 
  
 
