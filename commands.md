@@ -75,9 +75,16 @@ After deleting a namespace don't forget to reset ```kubectl``` to use the *defau
 * To delete a pv *imperatively*: ```kubectl delete pv {pv-name}``` **Note:** This command is used when a pvc is deleted and the *ReclaimPolicy* of the storageclass is *Retain*
 * To delete a sc *imperatively*: ```kubectl delete sc {storageclass-name}``` **Caution:** This is not the recommended way to delete a sc, instead, use the *declarative* way.
 * To delete a sc *declaratively*: ```kubectl delete -f {storageclass-manifest-file}```
-
-
-
-
- 
+## Chapter 12 - ConfigMaps and Secrets
+* To create a configmap (from command-line values) *imperatively*: ```kubectl create configmap {configmap-name} --from-literal {key}={value} [--from-literal {key}={value}]...``` or ```kubectl create cm {configmap-name} --from-literal {key}={value} [--from-literal {key}={value}]...``` 
+* To create a configmap (from file) *imperatively*: ```kubectl create configmap {configmap-name} --from-file {filename}``` or ```kubectl create cm {configmap-name} --from-file {filename}```
+* To inspect a configmap: ```kubectl get cm [{configmap-name}]``` or ```kubectl describe cm {configmap-name}```
+* To create a configmap *declaratively*: ```kubectl apply -f {configmap-manifest-file}```
+* To delete a configmap *imperatively*: ```kubectl delete cm {configmap-name}```
+* To delete a configmap *declaratively*: ```kubectl delete -f {configmap-manifest-file}```
+* To create a secret (from command-line values) *imperatively*: ```kubectl create secret generic {secret-name} --from-literal {key}={value} [--from-literal {key}={value}]...```
+* To create a secret *imperatively*: ```kubectl apply -f {secret-manifest-file}``` 
+* To inspect a secret: ```kubectl get secret [{secret-name}]``` or ```kubectl describe secret {secret-name}```
+* To delete a secret *imperatively*: ```kubectl delete secret {secret-name}```
+* To delete a secret *declaratively*: ```kubectl delete -f {secret-manifest-file}```
 
